@@ -34,7 +34,11 @@ class MainActivity : AppCompatActivity(),MyView.Listener {
         textTv.setTextColor(getColor(R.color.blue))
         textTv.setText("Выбирайте ход")
 
-        text1.setOnClickListener { canvasView.onSize(); canvasView.model[Random.nextInt(0,2)][Random.nextInt(0,2)].flag = 1;
+        text1.setOnClickListener {
+
+            canvasView.onSize(); canvasView.model[1][1].flag = 1;
+
+          //  canvasView.onSize(); canvasView.model[Random.nextInt(0,2)][Random.nextInt(0,2)].flag = 1;
          textTv.setTextColor(getColor(R.color.blue)); textTv.setText("Играем");victory = true }
 
           text2.setOnClickListener { canvasView.onSize();textTv.setTextColor(getColor(R.color.blue)); textTv.setText("Играем"); victory = true }
@@ -49,24 +53,31 @@ class MainActivity : AppCompatActivity(),MyView.Listener {
         canvasView.model[x][y].flag = 2
         canvasView.invalidate()
 
-              onCheck()
+           //   onCheck()
+        if (step(1)) {onCheck();canvasView.invalidate(); return}
+        if (step(2)) {onCheck();canvasView.invalidate(); return}
 
-
-             if (step(1)) {onCheck();canvasView.invalidate(); return}
-             if (step(2)) {onCheck();canvasView.invalidate(); return}
+           //  if (step(1)) {onCheck();canvasView.invalidate(); return}
+           //  if (step(2)) {onCheck();canvasView.invalidate(); return}
 
 
         if ( canvasView.model[1][1].flag != null ) {
             val l = canvasView.model[1][1].flag
 
 
-            if (canvasView.model[0][0].flag == l ) { if (canvasView.model[2][2].flag == null ) { canvasView.model[2][2].flag = 1; onCheck(); return} }
-            if (canvasView.model[2][0].flag == l ) { if (canvasView.model[0][2].flag == null )  {canvasView.model[0][2].flag = 1; onCheck(); return }}
-            if (canvasView.model[2][2].flag == l ) { if (canvasView.model[0][0].flag == null ) { canvasView.model[0][0].flag = 1; onCheck(); return }}
-            if (canvasView.model[0][2].flag == l ) { if (canvasView.model[2][0].flag == null ) { canvasView.model[2][0].flag = 1; onCheck(); return }}
+            if (canvasView.model[0][0].flag != null ) { if (canvasView.model[2][2].flag == null ) { canvasView.model[2][2].flag = 1; onCheck(); return} }
+            if (canvasView.model[2][0].flag != null ) { if (canvasView.model[0][2].flag == null )  {canvasView.model[0][2].flag = 1; onCheck(); return }}
+            if (canvasView.model[2][2].flag != null ) { if (canvasView.model[0][0].flag == null ) { canvasView.model[0][0].flag = 1; onCheck(); return }}
+            if (canvasView.model[0][2].flag != null ) { if (canvasView.model[2][0].flag == null ) { canvasView.model[2][0].flag = 1; onCheck(); return }}
+
+            for (i in 0..2 step 2) { for (j in 0..2 step 2) { if  (canvasView.model[i][j].flag == null) { canvasView.model[i][j].flag = 1; onCheck();return}}}
 
         }
-              onCheck()
+        onCheck()
+
+
+
+
                for (a in 0.. 2) { for (b in 0..2) {
 
                    if (canvasView.model[a][b].flag == null) { canvasView.model[a][b].flag = 1;onCheck(); return }  }
